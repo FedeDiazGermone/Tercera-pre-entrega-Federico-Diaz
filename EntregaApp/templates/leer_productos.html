@@ -1,0 +1,29 @@
+{% extends 'padre.html' %}
+
+
+{% block contenidoQueCambia %}
+  
+
+<h1>Lista de Productos</h1>
+
+<ul>
+  
+  {% for producto in productos %}
+    <li>
+      {{producto.nombre}} - {{producto.precio_costo}}
+    </li>
+    <div style="display: flex; column-gap: 5px;">
+      <form action="{% url 'EliminaProducto' producto.codigo %}" method="post">{% csrf_token %}
+        <button type="submit"> Eliminar </button>
+      </form>
+      <button>
+        <a href="{% url 'EditaProducto' producto.codigo %}"> Actualizar </a>
+      </button>
+    </div>
+  {% endfor %}
+
+</ul>
+
+<a href="{% url 'CreaProducto' %}">Crear Producto</a>
+
+{% endblock contenidoQueCambia %}
